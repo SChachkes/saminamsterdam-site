@@ -1,8 +1,10 @@
 'use client';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 
-mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN as string | undefined;
+(mapboxgl as any).accessToken = MAPBOX_TOKEN || '';
 
 type Pin = { name: string; cat: string; note?: string; lng: number; lat: number; visited?: boolean };
 
@@ -30,6 +32,14 @@ const categories = [
 ];
 
 export default function MapPage() {
+  if (!MAPBOX_TOKEN) {
+    return (
+      <div className="p-4 text-sm">
+        Map unavailable: missing <code>NEXT_PUBLIC_MAPBOX_TOKEN</code>.  
+        Add it in Vercel → Project → Settings → Environment Variables (Production), then Redeploy.
+      </div>
+    );
+  }
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<mapboxgl.Map | null>(null);
   const [filter, setFilter] = useState('all');
