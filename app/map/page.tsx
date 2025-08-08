@@ -49,15 +49,28 @@ export default function MapPage() {
 
     map.on('load', () => {
       // add pins as a GeoJSON source + layer
-      const features = seedPins.map((p) => ({
-        type: 'Feature',
-        geometry: { type: 'Point', coordinates: [p.lng, p.lat] },
-        properties: { name: p.name, cat: p.cat, note: p.note }
-      }));
-      map.addSource('pins', {
-        type: 'geojson',
-        data: { type: 'FeatureCollection', features }
-      });
+      
+      const fc = {
+  type: 'FeatureCollection' as const,
+  features: pins.map((p: any) => ({
+    type: 'Feature' as const,
+    geometry: {
+      type: 'Point' as const,
+      // IMPORTANT: lng, lat tuple
+      coordinates: [p.lng, p.lat] as [number, number],
+    },
+    properties: {
+      name: p.name,
+      cat: p.cat,
+      note: p.note ?? '',
+    },
+  })),
+};
+
+map.addSource('pins', {
+  type: 'geojson',
+  data: fc as any, 
+});
       map.addLayer({
         id: 'pins',
         type: 'circle',
