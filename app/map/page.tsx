@@ -50,6 +50,7 @@ export default function MapPage() {
     map.on('load', () => {
       // add pins as a GeoJSON source + layer
       
+      const pins = seedPins;
       const fc = {
   type: 'FeatureCollection' as const,
   features: pins.map((p: any) => ({
