@@ -40,7 +40,7 @@ export default function MapPage() {
     const map = new mapboxgl.Map({
       container: mapRef.current,
       style: 'mapbox://styles/mapbox/streets-v12',
-      center,
+      center: [4.872, 52.397] as [number, number],
       zoom: 12.3,
       attributionControl: true
     });
