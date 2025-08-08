@@ -1,8 +1,16 @@
-export default function Page() {
+export default function TripPlannerPage() {
   return (
-    <section className="bg-white/80 backdrop-blur rounded-3xl p-6 shadow-sm border border-black/5">
-      <h2 className="text-xl font-semibold bg-clip-text text-transparent grad-anim mb-2">Trip Planner</h2>
-      <p className="text-neutral-700">Create per-trip itineraries, food lists, budgets, and checklists.</p>
+    <section className="max-w-3xl mx-auto p-6">
+      <h1 className="text-2xl font-semibold mb-2">Trip Planner</h1>
+      <p className="text-sm text-black/60 mb-4">
+        Create per-trip itineraries, food lists, budgets, and checklists.
+      </p>
+      <div className="border border-black/10 rounded-2xl p-4 bg-white/70">
+        <p className="text-sm">
+          Coming soon! We can start with a simple checklist + notes per trip, then
+          add dates and budgets. Tell me what fields you want and I’ll scaffold it.
+        </p>
+      </div>
     </section>
   );
 }

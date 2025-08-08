@@ -1,8 +1,22 @@
-export default function Page() {
+export default function EventsPage() {
+  const events = [
+    { date: "2025-09-04", title: "Concert @ Paradiso", where: "Leidseplein", link: "#" },
+    { date: "2025-09-10", title: "Saturday Market", where: "Noordermarkt", link: "#" },
+  ];
+
   return (
-    <section className="bg-white/80 backdrop-blur rounded-3xl p-6 shadow-sm border border-black/5">
-      <h2 className="text-xl font-semibold bg-clip-text text-transparent grad-anim mb-2">Events</h2>
-      <p className="text-neutral-700">Daily topline auto-generated at 08:00 with Vercel Cron.</p>
+    <section className="max-w-3xl mx-auto p-6">
+      <h1 className="text-2xl font-semibold mb-4">Events</h1>
+      <ul className="space-y-3">
+        {events.map((e) => (
+          <li key={`${e.date}-${e.title}`} className="border border-black/10 rounded-2xl p-4 bg-white/70">
+            <div className="text-xs text-black/50">{e.date}</div>
+            <div className="font-medium">{e.title}</div>
+            <div className="text-sm text-black/70">{e.where}</div>
+            {e.link && <a className="text-sm underline mt-1 inline-block" href={e.link}>Details</a>}
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

@@ -1,8 +1,16 @@
-export default function Page() {
+export default function NotesPage() {
+  const notes = [
+    "Albert Cuyp market stroopwafels > everything.",
+    "Best bike routes: Vondelpark → Sloterplas → back via Rembrandtpark.",
+    "Bring cash for tiny cafés; card is fine most places though."
+  ];
+
   return (
-    <section className="bg-white/80 backdrop-blur rounded-3xl p-6 shadow-sm border border-black/5">
-      <h2 className="text-xl font-semibold bg-clip-text text-transparent grad-anim mb-2">Notes</h2>
-      <p className="text-neutral-700">Guestbook notes auto-publish + email ping to you.</p>
+    <section className="max-w-3xl mx-auto p-6">
+      <h1 className="text-2xl font-semibold mb-4">Notes</h1>
+      <ul className="list-disc pl-6 space-y-2 text-[15px]">
+        {notes.map((n, i) => <li key={i}>{n}</li>)}
+      </ul>
     </section>
   );
 }

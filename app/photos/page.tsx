@@ -1,8 +1,19 @@
-export default function Page() {
+export default function PhotosPage() {
+  const images = [
+    "/photos/canals-1.jpg",
+    "/photos/bikes-1.jpg",
+    "/photos/sunset-1.jpg",
+  ];
+
   return (
-    <section className="bg-white/80 backdrop-blur rounded-3xl p-6 shadow-sm border border-black/5">
-      <h2 className="text-xl font-semibold bg-clip-text text-transparent grad-anim mb-2">Photos</h2>
-      <p className="text-neutral-700">Uploads & slideshow coming in next commit (Supabase Storage).</p>
+    <section className="max-w-5xl mx-auto p-6">
+      <h1 className="text-2xl font-semibold mb-4">Photos</h1>
+      <p className="text-sm text-black/60 mb-4">Drop JPGs in <code>/public/photos</code> and list them here.</p>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        {images.map((src) => (
+          <img key={src} src={src} alt="" className="w-full h-48 object-cover rounded-2xl border border-black/10" />
+        ))}
+      </div>
     </section>
   );
 }
