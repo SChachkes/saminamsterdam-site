@@ -121,7 +121,7 @@ map.addSource('pins', {
           .addTo(map);
       });
       map.on('mouseleave', 'pins', () => popup.remove());
-    });
+      
 
     return () => map.remove();
   }, []);
