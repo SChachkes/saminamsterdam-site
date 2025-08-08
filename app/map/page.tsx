@@ -98,7 +98,10 @@ map.addSource('pins', {
       map.on('mousemove', 'pins', (e) => {
         if (!e.features?.length) return;
         const f = e.features[0];
-        const coords = f.geometry.type === 'Point' ? f.geometry.coordinates as [number, number] : [0, 0];
+        const coords: [number, number] =
+  f.geometry.type === 'Point'
+    ? (f.geometry.coordinates as [number, number])
+    : [0, 0];
         popup
           .setLngLat(coords)
           .setHTML(`<div style="font-weight:600">${f.properties?.name}</div><div style="font-size:12px;color:#666">${f.properties?.note || ''}</div>`)
