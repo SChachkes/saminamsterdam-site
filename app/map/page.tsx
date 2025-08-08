@@ -43,6 +43,7 @@ export default function MapPage() {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<mapboxgl.Map | null>(null);
   const [filter, setFilter] = useState('all');
+  const [mapReady, setMapReady] = useState(false);
 
   useEffect(() => {
     if (!mapRef.current || mapInstance.current) return;
@@ -103,7 +104,9 @@ map.addSource('pins', {
           'circle-stroke-width': 0.6
         }
       });
-
+        setMapReady(true);
+    });
+    
       const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: true });
       map.on('mousemove', 'pins', (e) => {
         if (!e.features?.length) return;
@@ -124,11 +127,23 @@ map.addSource('pins', {
   }, []);
 
   useEffect(() => {
-    const map = mapInstance.current;
-    if (!map) return;
-    const expr = filter === 'all' ? ['!=', ['get', 'cat'], '___none___'] : ['==', ['get', 'cat'], filter];
-    map.setFilter('pins', expr as any);
-  }, [filter]);
+  const map = mapInstance.current;
+  if (!map) return;
+
+  const layerId = 'pins';
+  const expr =
+    filter === 'all'
+      ? ['!=', ['get', 'cat'], '__none__']  // show everything
+      : ['==', ['get', 'cat'], filter];
+
+  if (mapReady && map.getLayer(layerId)) {
+    map.setFilter(layerId, expr as any);
+  } else {
+    map.once('idle', () => {
+      if (map.getLayer(layerId)) map.setFilter(layerId, expr as any);
+    });
+  }
+}, [filter, mapReady]);
 
   return (
     <div className="space-y-4">
