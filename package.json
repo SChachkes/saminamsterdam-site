@@ -2,12 +2,12 @@
   "name": "sam-in-amsterdam",
   "private": true,
   "version": "0.1.0",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "postinstall": "tailwindcss -v >/dev/null 2>&1 || true"
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint",
+  "postinstall": "tailwindcss -v >/dev/null 2>&1 || true"
   },
   "dependencies": {
     "next": "14.2.4",
